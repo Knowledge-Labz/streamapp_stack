@@ -1,0 +1,22 @@
+version: '3.7'
+services:
+  nms:
+    build:
+      context: nms/
+    ports:
+      - "1935:1935"
+      - "8000:8000"
+    networks:
+      - stream
+  frontend:
+    build:
+      context: frontend/
+    ports:
+      - "3000:3000"
+    networks:
+      - stream
+    depends_on:
+      - nms
+networks:
+  stream:
+    driver: bridge
